@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget xmlns = "http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0" xmlns:android = "http://schemas.android.com/apk/res/android" id = "com.donreptile.json" version = "1.0.0">
+	<name>JSON app</name>
+	<description>
+		This app brews beer.
+	</description>
+
+	<author email="seymourbutts@phonegap.com" href="https://phonegap.com">
+	   PhoneGap Team
+	</author>
+
+  <feature name="Capture">
+    <param name="android-package" value="org.apache.cordova.Capture" />
+  </feature>
+
+	<preference name="phonegap-version" value="cli-6.0.0" />
+</widget>

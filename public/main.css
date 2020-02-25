@@ -1,0 +1,420 @@
+body {
+	background: #eceeec;
+	margin: 0;
+	font: 16px/20px Courier;
+}
+
+#start.active {
+  background: green;
+}
+
+#devices canvas {
+	background: #f5f5f5;
+	box-shadow: 10px 10px 40px rgba(0,0,0,0.05);
+}
+
+#main-menu {
+	display: flex;
+}
+
+#logo {
+	padding: 10px 20px;
+	font: 20px/30px Courier;
+	color: #6a1;
+	cursor: default;
+}
+
+#user-wrapper {
+	position: absolute;
+	height: 30px;
+	padding: 10px 20px;
+	top: 0;
+	right: 0;
+	display: none;
+}
+#user {
+	display: inline-block;
+	vertical-align: middle;
+	color: #333;
+	margin-right: 10px;
+}
+#user span {
+	color: #999;
+}
+
+#charts {
+	margin: 0 auto;
+	background: #eef0ee;
+	box-shadow: 0 0 50px rgba(0, 30, 0, 0.01);
+	text-align: center;
+}
+
+#logout {
+	vertical-align: middle;
+	display: inline-block;
+	height: 30px;
+	padding: 5px 10px;
+	border: none;
+	background: #999;
+	color: #fff;
+	font: 16px/20px Courier;
+}
+
+#admin-form,
+#connect-device,
+#rename-devices {
+	width: 250px;
+	padding: 10px 30px 10px 40px;
+	margin: 10px;
+	border: 1px dashed #ccc;
+	background: #f5f5f5;
+	display: none;
+	position: absolute;
+	top: 50px;
+	left: 0;
+	box-shadow: 10px 10px 50px rgba(0,0,0,0.1);
+	z-index: 2;
+}
+
+#rename-devices {
+	width: 260px;
+}
+
+#admin-form input,
+#admin-form button,
+#connect-device input,
+#connect-device button,
+#rename-devices input,
+#rename-devices button {
+	border: 1px #999 solid;
+	font: 20px/30px Courier;
+	padding: 5px 10px;
+	margin-bottom: 10px;
+	width: 140px;
+	box-sizing: content-box;
+}
+#connect-device input,
+#connect-device button {
+	width: 218px;
+}
+
+#connect-device button {
+	cursor: pointer;
+	background: #6a1;
+	color: #fff;
+	border-color: transparent;
+}
+#new-password {
+	font: 20px/30px Courier;
+	height: 30px;
+}
+#admin-form button,
+#rename-devices button {
+	width: auto;
+	margin-left: 20px;
+	cursor: pointer;
+}
+
+#admin-form h4,
+#connect-device h4,
+#rename-devices h4 {
+	font-weight: normal;
+	margin: 0 0 10px;
+}
+
+.admin-button {
+	position: relative;
+	width: 30px;
+	height: 30px;
+	margin: 10px 10px 10px 0;
+	cursor: pointer;
+}
+
+.icon {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.modifier {
+	position: absolute;
+}
+
+.modifier.add {
+	bottom: -25%;
+	right: -25%;
+	width: 100%;
+	height: 100%;
+}
+
+.modifier.link {
+	bottom: -5%;
+	right: -5%;
+	width: 70%;
+	height: 70%;
+}
+
+.admin-button svg path {
+	fill: #999;
+}
+
+.modifier.border svg path {
+	stroke: #f5f5f5;
+	stroke-width: 15;
+}
+
+.admin-button.active svg path {
+	fill: #333;
+}
+
+#logout:hover {
+	background: #888;
+	cursor: pointer;
+}
+
+#charts canvas {
+	background: #f5f5f5;
+	box-shadow: 10px 10px 40px rgba(0,0,0,0.05);
+}
+
+#auth-form {
+	width: 300px;
+	padding: 50px;
+	background: #f5f5f5;
+	box-shadow: 10px 10px 40px rgba(0,0,0,0.05);
+	display: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+#auth-form input,
+#auth-form button {
+	border: 1px #999 solid;
+	font: 20px/30px Courier;
+	padding: 5px 10px;
+	margin-bottom: 10px;
+	display: block;
+	width: 278px;
+	box-sizing: content-box;
+}
+
+#auth-form button {
+	cursor: pointer;
+	background: #27d;
+	border: none;
+	padding: 6px 11px;
+	color: #f5f5f5;
+}
+
+#auth-form .sumit-register {
+	background: #6a1;
+}
+
+#menu-bar {
+	height: 50px;
+	width: 100%;
+	background: #f5f5f5;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.01);
+}
+
+.chart-wrapper {
+	position: relative;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	display: inline-block;
+	margin-right: 70px;
+}
+
+.labels-wrapper {
+	margin-bottom: 10px;
+}
+
+.chart-label {
+	display: inline-block;
+	margin-right: 10px;
+	color: #fff;
+	font: 14px/18px Arial;
+	padding: 5px 10px;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+.chart-label.disabled {
+	background: #999 !important;
+}
+
+.label-name {
+	margin-right: 10px;
+}
+
+.device-id {
+	font-size: 8px;
+	letter-spacing: 1px;
+	text-align: left;
+	opacity: 0.6;
+	line-height: 10px;
+}
+
+h2 {
+	font: 20px/30px Arial;
+	color: #999;
+	margin: 20px 0 10px;
+	height: 30px;
+}
+
+.label-arrow {
+	border-bottom: 10px #fff solid;
+	border-left: 20px transparent solid !important;
+	width: 0;
+	height: 0;
+	position: absolute;
+	bottom: 0;
+	right: 100%;
+}
+.lower .label-arrow {
+	bottom: auto;
+	top: 0;
+	border-bottom: none;
+	border-top: 10px #fff solid;
+}
+
+.chart-label.lower{
+	margin-top: 50px;
+}
+
+.reading {
+	background: #fff;
+	padding: 20px;
+	margin: 10px;
+	display: inline-block;
+}
+
+.reading .title {
+	font: bold 16px/20px Arial;
+	color: #f90;
+}
+
+.reading .date {
+	font: 10px/14px Arial;
+	color: #aaa;
+}
+
+.reading ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: table;
+	margin-top: 10px;
+}
+
+.reading ul li {
+	display: table-row;
+}
+
+.reading ul li strong, .reading ul li span {
+	display: table-cell;
+}
+
+.reading ul li strong {
+	font: bold 14px/18px Arial;
+	color: #0a4;
+	padding-right: 20px;
+}
+
+.reading ul li span {
+	font: 14px/18px Arial;
+	color: #555;
+}
+
+.mySpecialButton {
+	padding: 10px 20px;
+	font: bold 12px/18px Arial;
+	color: #fff;
+	background: #666;
+	border-radius: 10px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.mySpecialButton:hover {
+	background: #888;
+}
+.axis-labels {
+	position: absolute;
+	width: 100%;
+	bottom: 7px;
+	height: 200px;
+}
+
+.axis-label {
+	position: absolute;
+	color: #ccc;
+	margin-top: -8px;
+	margin-left: 3px;
+	right: -60px;
+	width: 50px;
+}
+
+.axis-label::after {
+	content: '';
+	display: block;
+	position: absolute;
+	height: 1px;
+	width: 5px;
+	background: #ddd;
+	top: 9px;
+	left: -10px;
+}
+
+.units {
+	font-size: 12px;
+}
+
+.time-labels {
+	position: absolute;
+	bottom: 7px;
+	left: 0;
+}
+
+.time-label {
+	position: absolute;
+	color: #9bf;
+	width: 60px;
+	text-align: center;
+	margin-left: -30px;
+	padding-top: 5px;
+}
+
+.time-label::after {
+	content: '';
+	display: block;
+	width: 1px;
+	height: 6px;
+	background: #bcf;
+	position: absolute;
+	top: 0;
+	left: 29px;
+}
+
+.device {
+	margin: 5px 0;
+}
+
+#status {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 50px;
+	right: 0;
+}
+
+#status.ok { background: #0a4; }
+#status.rising { background: #f90; }
+#status.alert { background: #ff2711; }
+#status.falling { background: #0f3de9; }

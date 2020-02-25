@@ -1,0 +1,13 @@
+G04 Gerber job file.*
+%TF.FileFunction,JobInfo*%
+%TF.GenerationSoftware,Autodesk,EAGLE,9.0.1*%
+%TF.CreationDate,2018-06-20T13:34:44Z*%
+%TF.Part,Single*%
+%MOMM*%
+%TJ.B_Owner,Aux Lux <eagle@dende.pl>*%
+%TJ.B_ID,sensor*%
+%TJ.B_LayerNum,2*%
+%TJ.B_Thickness,1.570000*%
+%TJ.B_Size_X,51.994000*%
+%TJ.B_Size_Y,57.140000*%
+M02*

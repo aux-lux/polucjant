@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+	<title>Jeden Jedyny Jason</title>
+	<link rel="stylesheet" href="main.css">
+	<script type="text/javascript" src="socket/socket.io.js"></script>
+	<script>const socket = io();</script>
+</head>
+<body>
+	<div id="menu-bar">
+		<div id="main-menu">
+			<div id="logo">difu.io</div>
+		</div>
+		<div id="user-wrapper">
+			<div id="user"></div>
+			<button id="logout">Logout</button>
+		</div>
+	</div>
+	<form id="auth-form">
+		<input name="email" type="text" placeholder="E-mail" />
+		<input name="password" type="password" placeholder="Password" />
+		<button class="sumit-login">Login</button>
+		<button class="sumit-register">Register</button>
+	</form>
+	<div id="rename-devices">
+		<h4>Rename devices</h4>
+	</div>
+	<form id="connect-device" class="form">
+		<h4>Connect device</h4>
+		<input name="device-id" type="text" placeholder="chip id" autocomplete="off" />
+		<input name="device-pass" type="text" placeholder="password" autocomplete="off" />
+		<button>Connect</button>
+	</form>
+	<div id="charts"></div>
+	<div id="status" class="ok"></div>
+	<script src="img/svg.js"></script>
+	<script src="dataUtils.js"></script>
+	<script src="forms.js"></script>
+	<script src="chart.js"></script>
+	<script src="events.js"></script>
+	<script src="main.js"></script>
+</body>
+</html>

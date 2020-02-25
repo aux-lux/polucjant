@@ -1,0 +1,51 @@
+const express = require('express');
+const app = express();
+const https = require('https');
+const fs = require('fs');
+const serverPort = 557;
+const options = { 
+	key: fs.readFileSync('/etc/letsencrypt/live/difu.io/privkey.pem'),
+	cert: fs.readFileSync('/etc/letsencrypt/live/difu.io/cert.pem'),
+	ca: fs.readFileSync('/etc/letsencrypt/live/difu.io/chain.pem')
+};
+const server = https.Server(options, app);
+const io = require('socket.io')(server);
+
+global.SECONDS = 1000;
+global.MINUTES = 60 * SECONDS;
+global.HOURS = 60 * MINUTES;
+global.DAYS = 24 * HOURS;
+
+const { Reactor, Event } = require('./app/utils/events.js');
+global.colors = require('colors/safe');
+global.auth = require('./auth.js');
+global.reactor = new Reactor();
+reactor.registerEvent('data');
+reactor.registerEvent('device');
+
+const wsServer = require('./app/esp/connection.js');
+const Clients = require('./app/client/Clients.js');
+const Devices = require('./app/esp/Devices.js');
+const DataArchivizer = require('./app/esp/DataArchivizer.js');
+global.devices = new Devices();
+const dataArchivizer = new DataArchivizer();
+
+dataArchivizer.archivize();
+
+const clients = new Clients();
+
+function setupUI() {
+	io.on('connection', function(socket){
+		console.log('a user connected');
+		const user = clients.add(socket);
+	});
+
+	app.use('/socket', express.static('node_modules/socket.io-client/dist'));
+	app.use(express.static('public'));
+  app.get('/', (req, res) => {
+		res.sendFile(__dirname + '/index.html')
+  });
+  server.listen(serverPort, () => console.log(`Example app listening on port ${serverPort}!`));
+}
+
+setupUI();
