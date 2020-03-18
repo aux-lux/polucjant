@@ -15,6 +15,7 @@ var chartSets = [
 		attr: 'pm25',
 		values: []
 	},
+	/*
 	{
 		name: 'Temperature',
 		attr: 'temp',
@@ -35,6 +36,7 @@ var chartSets = [
 		attr: 'pres',
 		values: []
 	},
+	*/
 	// {
 	// 	name: 'Tvoc',
 	// 	attr: 'tvoc',
@@ -57,7 +59,7 @@ socket.on('init', (initialData) => {
 	console.log('initialData: ', initialData);
 	for(var id in initialData) {
 		var intId = parseInt(id, 10);
-		var data = initialData[id].data;
+		var data = initialData[id].data.sort((a, b) => (a.time - b.time));
 		var meta = initialData[id].meta;
 		// console.log('initialData[id]: ', initialData[id]);
 		// console.log('meta: ', meta, data);

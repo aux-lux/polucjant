@@ -26,12 +26,13 @@ class Client {
 
   bindEvents() {
     reactor.addEventListener('data', (event) => {
-		  if (this.doDeviceExist(event.id)) {
+      console.log('on data', event.data);
+		  // if (this.doDeviceExist(event.id)) {
 				if (this.stack[event.id] === undefined) {
           this.stack[event.id] = [];
         }
 				this.stack[event.id].push(event.data);
-      }
+      // }
     });
     
   }
@@ -72,6 +73,7 @@ class Client {
   }
 
   updateData() {
+    console.log('update data: ', this.stack);
     this.socket.emit('data', this.stack);
     this.stack = {};
   }

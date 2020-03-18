@@ -5,9 +5,11 @@ class Device {
     this.id = id;
     this.getRaw();
     if (this.buf) {
-      console.log(this.buf.length);
+      // console.log(this.buf.length);
       this.data = this.parseRaw(this.buf);
       this.parsedData = this.parseData(this.data);
+    } else {
+      this.parsedData = [];
     }
     // this.refreshDb();
     
@@ -40,11 +42,15 @@ class Device {
   parseData(data) {
     const now = new Date();
     const day = 86400;
-    const timestamp = Math.floor(now.getTime() / 1000 / day) * day;
+    const nowSeconds = now.getUTCHours() * 60 * 60 + now.getUTCMinutes() * 60 + now.getUTCSeconds();
+    const timestamp = now.getTime() - nowSeconds;
     const parsedData = [];
     data.forEach((ob, index) => {
+      // const newTime = Math.floor((timestamp + ob.time / 65536 * day) * 1000);
+      // console.log({newTime});
+      const backTime = Math.floor(ob.time / 65536 * day);
       const newOb = {
-        time: Math.floor((timestamp + ob.time / 65536 * day) * 1000),
+        time: timestamp + backTime,
         pm25: ob.pm25 === 9999 ? null : ob.pm25,
         temp: ob.temp / 100,
         humi: ob.humi / 100,
@@ -114,10 +120,15 @@ class Device {
       }); 
     });
 
-    console.log(data);
+    // console.log({data});
     const parsedBin = this.parseRaw(data);
+    // console.log({parsedBin});
     const parsedData = this.parseData(parsedBin);
-    this.parsedData.push(parsedData.pop());
+    const outputData = parsedData.pop();
+    // console.log({parsedData});
+    this.parsedData.push(outputData);
+    console.log({id: this.id, data: outputData});
+    reactor.dispatchEvent('data', {id: this.id, data: outputData});
     // console.log('Push: ', parsedData);
     // this.db.get('data').push(this.formatData(data)).write();
     //console.log('Data:', data);

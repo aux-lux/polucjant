@@ -22,42 +22,44 @@ const cv = (n) => {
   return ar;
 };
 const parseBinary = (buf) => {
+  /*
   const temp = buf.readInt16LE(0);
   const humi = buf.readInt16LE(2);
   const pres = buf.readInt16LE(4);
-  let pm25 = buf.readInt16LE(6);
+  */
+  let pm25 = buf.readInt16LE(0);
   if (pm25 === 9999) {
     pm25 = null;
   }
   
   const now = new Date();
-  const nowSeconds = now.getHours() * 60 * 60 + now.getMinutes() * 60 + now.getSeconds();
+  const nowSeconds = now.getUTCHours() * 60 * 60 + now.getUTCMinutes() * 60 + now.getUTCSeconds();
   const time = Math.max(0, Math.min(65536, Math.round(nowSeconds / 86400 * 65536)));
-  console.log({time});
+  // console.log({time});
   const output = Buffer.concat([buf, Buffer.from(cv(time))]);
 
-  return ob = [{temp, humi, pres, pm25, bin: output}];
+  return ob = [{pm25, bin: output}];
 };
 
 module.exports = (message, headers) => {
   const id = headers['device-id'];
   const device = devices.getDevice(id);
   let ob;
-
   if (message.type === 'binary') {
+    console.log('Bin: ', message.binaryData);
     try {
       ob = parseBinary(message.binaryData);
     } catch (e) {
       console.warn('Wrong Binary');
     }
   } else {
+    // console.log('Txt: ', message.utf8Data);
     try {
       ob = JSON.parse(message.utf8Data);
     } catch (e) {
       console.warn('Wrong JSON');
     }
   }
-
 
   if (ob && ob.length) {
     const today = new Date();
@@ -70,6 +72,19 @@ module.exports = (message, headers) => {
       delete ob[0].bin;
       device.pushData(data);
 
+      // const parsedData = parseBinary(data);
+      // console.log('dispatch event "data": ', id, data, parsedData);
+      // reactor.dispatchEvent('deviceData', {id, data});
+
+      /*
+      if (auth.deviceMeta(id, data.data)) {
+        reactor.dispatchEvent('device', {
+          id: id,
+          data: localData[id],
+        });
+      }
+      */
+
       /*
       fs.mkdir(folder, { recursive: true }, (err) => {
         if (err) return console.log(err);
@@ -81,6 +96,10 @@ module.exports = (message, headers) => {
     }
   
     const now = today.getTime();
+    if (ob) {
+
+    }
+    /*
     console.log(id, 'ob:' , ob);
     ob.forEach((data) => {
       if (data.verbose !== undefined || data.data !== undefined) {
@@ -93,5 +112,6 @@ module.exports = (message, headers) => {
         }
       }
     });
+    */
   }
 };

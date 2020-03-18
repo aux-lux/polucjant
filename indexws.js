@@ -18,12 +18,12 @@ reactor.registerEvent('device');
 const wsServer = require('./app/esp/connection.js');
 const Clients = require('./app/client/Clients.js');
 const Devices = require('./app/esp/Devices.js');
-const DataArchivizer = require('./app/esp/DataArchivizer.js');
+// const DataArchivizer = require('./app/esp/DataArchivizer.js');
 global.devices = new Devices();
-const dataArchivizer = new DataArchivizer();
+// const dataArchivizer = new DataArchivizer();
 
-setInterval(dataArchivizer.archivize, 1 * DAYS);
-dataArchivizer.archivize();
+// setInterval(dataArchivizer.archivize, 1 * DAYS);
+// dataArchivizer.archivize();
 
 const clients = new Clients();
 
@@ -36,6 +36,10 @@ function setupUI() {
 
 	app.use('/socket', express.static('node_modules/socket.io-client/dist'));
 	app.use(express.static('public'));
+	app.get('/pm25/:value', (req, res) => {
+		console.log('Params: ', req.params);
+		res.send('Cacy');
+	});
   app.get('/', (req, res) => {
 		res.sendFile(__dirname + '/index.html')
   });

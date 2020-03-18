@@ -2,6 +2,7 @@ var dataUtils = {
 	getLatestDataValue: function(data, name) {
 		var now = (new Date()).getTime();
 		var targetTime = now - chartDelay;
+		// console.log(data, name);
 
 		for (var i=0;i<20;i++) {
 			var iData = data[data.length - 1 - i];
